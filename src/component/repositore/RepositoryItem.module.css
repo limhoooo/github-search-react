@@ -1,0 +1,14 @@
+.Repository--Box {
+    width: 25%;
+    padding: 20px;
+    box-sizing: border-box;
+    color: #fff;
+    border: 1px solid #fff;
+    cursor: pointer;
+}
+
+.Repository--Box:hover {
+    background-color: black;
+    border: 1px solid fuchsia;
+    color: fuchsia;
+}

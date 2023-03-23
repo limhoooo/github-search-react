@@ -1,10 +1,16 @@
 import './App.css';
-import Search from './component/search/Search';
+import RepositoryBackGround from './component/Repository/RepositoryBackGround';
+import SearchBackGround from './component/search/SearchBackGround';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const isSelect = useSelector(state => state.search.isSelect);
   return (
     <div className="App">
-      <Search />
+      {
+        !isSelect && <SearchBackGround />
+      }
+      <RepositoryBackGround />
     </div>
   );
 }

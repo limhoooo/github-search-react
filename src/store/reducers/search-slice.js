@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-const githubToken = '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';
+const githubToken = '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';
 export const fetchRepositories = createAsyncThunk(
     'search/fetchRepositories',
     async (name) => {
@@ -16,7 +16,8 @@ export const fetchRepositories = createAsyncThunk(
 
 const initialState = {
     resData: [],
-    loading: false
+    loading: false,
+    isSelect: false
 }
 const searchSlice = createSlice({
     name: 'search',
@@ -27,6 +28,7 @@ const searchSlice = createSlice({
         },
         [fetchRepositories.fulfilled]: (state, action) => {
             state.resData = action.payload;
+            state.isSelect = true;
             state.loading = false;
         },
         [fetchRepositories.rejected]: (state, action) => {

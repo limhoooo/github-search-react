@@ -1,0 +1,28 @@
+.selectInput {
+    background: #eee;
+    border: none;
+    width: 25em;
+    height: 3em;
+    border-radius: 5px;
+    padding: 15px;
+    box-sizing: border-box;
+    box-shadow: 0 10px 15px 2px rgb(0 0 0 / 10%), 0 4px 6px 4px rgb(0 0 0 / 5%);
+    outline: none;
+    transition: all 0.5s;
+}
+
+.selectButton {
+    background-color: #800080;
+    border: none;
+    width: 50px;
+    height: 40px;
+    margin-left: -5px;
+    vertical-align: bottom;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+}
+
+.valid {
+    background-color: blueviolet;
+}

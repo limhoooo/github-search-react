@@ -1,0 +1,22 @@
+.search--contanier {
+    width: 100%;
+    height: 100%;
+    transition: all 0.4s;
+    background: #27293d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search__active {
+    transition: all 0.4s;
+
+}
+
+.valid {
+    background-color: crimson;
+}
+
+.search--contanier h1 {
+    color: #fff;
+}
