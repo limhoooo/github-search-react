@@ -1,12 +1,24 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 const githubToken = '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';
-export const fetchRepositories = createAsyncThunk(
-    'search/fetchRepositories',
-    async (name) => {
-        const response = await fetch(`https://api.github.com/users/${name}/repos`, {
+export const fetchRepositoryList = createAsyncThunk(
+    'search/fetchRepositoryList',
+    async (owner) => {
+        const response = await fetch(`https://api.github.com/users/${owner}/repos`, {
             headers: {
-                Authorization: `token ${githubToken}`
+                //Authorization: `token ${githubToken}`
+            }
+        });
+        const data = await response.json();
+        return { data, owner };
+    }
+)
+export const fetchRepository = createAsyncThunk(
+    'search/fetchRepository',
+    async (owner, repo) => {
+        const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
+            headers: {
+                //Authorization: `token ${githubToken}`
             }
         });
         const data = await response.json();
@@ -16,6 +28,7 @@ export const fetchRepositories = createAsyncThunk(
 
 const initialState = {
     resData: [],
+    owner: '',
     loading: false,
     isSelect: false
 }
@@ -23,15 +36,16 @@ const searchSlice = createSlice({
     name: 'search',
     initialState,
     extraReducers: {
-        [fetchRepositories.pending]: (state, action) => {
+        [fetchRepositoryList.pending]: (state, action) => {
             state.loading = true;
         },
-        [fetchRepositories.fulfilled]: (state, action) => {
-            state.resData = action.payload;
+        [fetchRepositoryList.fulfilled]: (state, action) => {
+            state.resData = action.payload.data;
+            state.owner = action.payload.owner;
             state.isSelect = true;
             state.loading = false;
         },
-        [fetchRepositories.rejected]: (state, action) => {
+        [fetchRepositoryList.rejected]: (state, action) => {
             state.loading = false;
 
         },

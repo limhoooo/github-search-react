@@ -5,10 +5,49 @@
     color: #fff;
     border: 1px solid #fff;
     cursor: pointer;
+    position: relative;
 }
 
-.Repository--Box:hover {
-    background-color: black;
-    border: 1px solid fuchsia;
-    color: fuchsia;
+.Repository--Box::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #222;
+    background-image: url('../../assets/github-icon-gray.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 10%;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+}
+
+.Repository--Box:hover:before {
+    height: 0%;
+}
+
+.Repository--Box p {
+    margin: 0;
+}
+
+.Repository--Box .name {
+    font-size: 1.6rem;
+    margin-bottom: 0.6em;
+    font-weight: bold;
+}
+
+.Repository--Box .description {
+    margin-bottom: 1.6em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    height: 20px;
+}
+
+.Repository--Box .bottomBox {
+    display: flex;
+    justify-content: space-between;
 }

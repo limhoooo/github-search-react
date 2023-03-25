@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './RepositoryBackGround.module.css'
-import RepositoryItem from '../Repository/RepositoryItem';
+import RepositoryItem from './RepositoryItem';
 import { useSelector } from 'react-redux';
 
 const RepositoryBackGround = () => {
