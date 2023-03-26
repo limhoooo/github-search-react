@@ -9,13 +9,12 @@ const useInput = (initalValue = null) => {
     const handler = useCallback(
         e => {
             const { value, name } = e.target;
-            setData({
-                ...data,
+            setData(state => ({
+                ...state,
                 [name]: value
-            });
-            console.log(value, name);
+            }));
         },
-        [data]
+        []
     );
     return [data, handler];
 };

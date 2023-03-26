@@ -9,10 +9,6 @@ const Search = () => {
     const dispatch = useDispatch();
     // 커스텀 훅으로 변경예정
     // https://kyounghwan01.github.io/blog/React/custome-hook/#%E1%84%8F%E1%85%A5%E1%84%89%E1%85%B3%E1%84%90%E1%85%A5%E1%86%B7-%E1%84%92%E1%85%AE%E1%86%A8
-    const [text, setText] = useInput({
-        email: "",
-        password: ""
-    });
     const [search, setSearch] = useState('');
     const [isValid, setIsValid] = useState(false);
     const onSearchValueHandler = (e) => {
@@ -35,8 +31,6 @@ const Search = () => {
                 <button className={classes['selectButton']}>
                     <img src={searchIcon} alt="search icon" />
                 </button>
-                <input name="email" value={text.email} onChange={setText} />
-                <input name="password" value={text.password} onChange={setText} />
             </form>
             {isValid && <p>정확한 검색어를 입력해주세요</p>}
         </div>
