@@ -1,7 +1,7 @@
 import React from 'react';
 import RepositoryBackGround from './component/repository/RepositoryBackGround';
 import SearchBackGround from './component/search/SearchBackGround';
-import { useSelector } from 'react-redux';
+import { useSelector, useStore } from 'react-redux';
 import Footer from './component/layout/Footer';
 
 function App() {
