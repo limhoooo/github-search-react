@@ -1,13 +1,7 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { API } from '../../api/index';
-
-interface searchType {
-  id: string;
-  name: string;
-  description: string;
-  created_at: string;
-  language: string;
-}
+import { sortByDate } from '../../util/parseDate';
+import { searchType } from './../../type/searchType';
 
 interface searchSliceType {
   resData: searchType[];
@@ -23,7 +17,7 @@ export const fetchRepositoryList = createAsyncThunk('search/fetchRepositoryList'
 export const fetchRepository = createAsyncThunk(
   'search/fetchRepository',
   async (data: { owner: string; repo: string }) => {
-    const response = await API.get(`/repos/${data.owner}/${data.repo}`);
+    const response = await API.get(`/repos/${data.owner}/${data.repo}/commits`);
     return response.data;
   }
 );
@@ -38,8 +32,8 @@ const searchSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
-    test: state => {
-      state.loading = true;
+    updateLoading: (state, actions: PayloadAction<boolean>) => {
+      state.loading = actions.payload;
     },
   },
   extraReducers: {
@@ -47,17 +41,21 @@ const searchSlice = createSlice({
       state.loading = true;
     },
     [fetchRepositoryList.fulfilled.type]: (state, action) => {
-      state.resData = action.payload.data;
+      state.resData = sortByDate(action.payload.data, 'updated_at').reverse();
       state.owner = action.payload.owner;
       state.isSelect = true;
-      state.loading = false;
     },
     [fetchRepositoryList.rejected.type]: (state, action) => {
       state.loading = false;
     },
-    // [fetchRepository.pending.type]: (state, action) => {},
-    // [fetchRepository.fulfilled.type]: (state, action) => {},
-    // [fetchRepository.rejected.type]: (state, action) => {},
+    [fetchRepository.pending.type]: (state, action) => {
+      state.loading = true;
+    },
+    // [fetchRepository.fulfilled.type]: (state, action) => {
+    // },
+    [fetchRepository.rejected.type]: (state, action) => {
+      state.loading = false;
+    },
   },
 });
 

@@ -1,7 +1,7 @@
-import { searchActions } from '../store/reducers/search-slice';
+import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore';
 import { API } from './index';
 
-const setUpInterceptors = store => {
+const setUpInterceptors = (store: ToolkitStore) => {
   API.interceptors.request.use(
     function (config) {
       return config;
@@ -14,10 +14,7 @@ const setUpInterceptors = store => {
 
   API.interceptors.response.use(
     function (response) {
-      console.log('response');
       // index.js 에서 넣어준 store 사용가능
-      store.dispatch(searchActions.test());
-      console.log(store.getState().search.loading);
       return response;
     },
     function (error) {

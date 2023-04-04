@@ -11,7 +11,16 @@ const RepositoryBackGround = () => {
       {items.length === 0 ? (
         <p>사용자 정보가 없습니다 </p>
       ) : (
-        items.map(item => <RepositoryItem key={item.id} data={item} />)
+        items.map(item => (
+          <RepositoryItem
+            key={item.id}
+            name={item.name}
+            description={item.description}
+            updated_at={item.updated_at}
+            created_at={item.created_at}
+            language={item.language}
+          />
+        ))
       )}
     </div>
   );

@@ -23,14 +23,14 @@ const Search = () => {
     dispatch(fetchRepositoryList(search.trim()));
     setSearch('');
   };
-
+  const validText = isValid ? '정확한 검색어를 입력해주세요' : 'Search Your Github';
   return (
     <div>
       <form onSubmit={onSearchSubmit}>
         <input
           type="text"
           className={`${classes['selectInput']} ${isValid && classes['valid']}`}
-          placeholder="Search Your Github"
+          placeholder={validText}
           value={search}
           onChange={onSearchValueHandler}
         />
@@ -38,7 +38,6 @@ const Search = () => {
           <img src={searchIcon} alt="search icon" />
         </button>
       </form>
-      {isValid && <p>정확한 검색어를 입력해주세요</p>}
     </div>
   );
 };
