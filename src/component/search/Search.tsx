@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import searchIcon from '../../assets/search-icon.png';
-import { fetchRepositoryList } from '../../store/reducers/search-slice';
+import { fetchRepositoryList, fetchRepository } from '../../store/reducers/search-slice';
 import classes from './Search.module.css';
 import { useAppDispatch } from '../../hook/hooks';
 
@@ -14,13 +14,16 @@ const Search = () => {
   const onSearchValueHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
-  const onSearchSubmit = (e: React.FormEvent) => {
+  const onSearchSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!search.trim()) {
       setIsValid(true);
       return;
     }
-    dispatch(fetchRepositoryList(search.trim()));
+    const aaa = await dispatch(fetchRepositoryList(search.trim())).unwrap();
+    console.log(aaa);
+    await dispatch(fetchRepository({ owner: aaa, repo: 'aaa' }));
+
     setSearch('');
   };
   const validText = isValid ? '정확한 검색어를 입력해주세요' : 'Search Your Github';
