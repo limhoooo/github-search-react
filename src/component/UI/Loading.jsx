@@ -7,27 +7,26 @@ import { searchActions } from '../../store/reducers/search-slice';
 const Backdrop = props => {
   return (
     <div className={classes.backdrop}>
-      <div className={`${classes.loader} ${classes['loader-black']} ${classes['loader-6']}`}></div>
+      <div className={classes.wrapper}>
+        <div className={classes.focus}>Loading...</div>
+        <div className={classes.mask}>
+          <div className={classes.text}>Loading...</div>
+        </div>
+      </div>
+      {/* <div className={`${classes.loader} ${classes['loader-black']} ${classes['loader-6']}`}></div> */}
     </div>
   );
 };
 
 const portalElement = document.getElementById('overlays');
-const Modal = props => {
+const Modal = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     setTimeout(() => {
       dispatch(searchActions.updateLoading(false));
-    }, 1000);
-  }, []);
-  return (
-    <>
-      {ReactDOM.createPortal(
-        <Backdrop toggleCartHandler={props.toggleCartHandler}>{props.children}</Backdrop>,
-        portalElement
-      )}
-    </>
-  );
+    }, 2000);
+  }, [dispatch]);
+  return <>{ReactDOM.createPortal(<Backdrop></Backdrop>, portalElement)}</>;
 };
 
 export default Modal;
