@@ -24,7 +24,7 @@ const Modal = () => {
   useEffect(() => {
     setTimeout(() => {
       dispatch(searchActions.updateLoading(false));
-    }, 2000);
+    }, 2500);
   }, [dispatch]);
   return <>{ReactDOM.createPortal(<Backdrop></Backdrop>, portalElement)}</>;
 };
